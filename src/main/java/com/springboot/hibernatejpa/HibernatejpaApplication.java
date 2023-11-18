@@ -38,9 +38,59 @@ public class HibernatejpaApplication {
 			//retrieveCourseAndReviews(instructorDAO);
 			//deleteCourseAndReviews(instructorDAO);
 			
-			createCourseAndStudents(instructorDAO);
+			//createCourseAndStudents(instructorDAO);
+			//findCourseAndStudents(instructorDAO);
+			//findStudentAndCourses(instructorDAO);
 
+			//addMoreCoursesForStudent(instructorDAO);
+			deleteStudentById(instructorDAO);
 		};
+	}
+
+	private void deleteStudentById(InstructorDAO instructorDAO) {
+		int id=2;
+
+		System.out.println("Deleting student id: " + id);
+
+		instructorDAO.deleteStudentById(id);
+	}
+
+	private void addMoreCoursesForStudent(InstructorDAO instructorDAO) {
+
+		int id=2;
+
+		Student student = instructorDAO.findStudentAndCoursesByStudentId(id);
+
+		Course course1 = new Course("JavaScript");
+		Course course2 = new Course("MsSQL");
+
+		student.addCourse(course1);
+		student.addCourse(course2);
+
+		System.out.println("Updating student : " + student);
+		System.out.println("associated courses : " + student.getCourses());
+
+		instructorDAO.updateStudent(student);
+
+	}
+
+	private void findStudentAndCourses(InstructorDAO instructorDAO) {
+
+		int id=2;
+		Student student = instructorDAO.findStudentAndCoursesByStudentId(2);
+
+		System.out.println("Loaded student : " + student);
+		System.out.println("Courses : " + student.getCourses());
+	}
+
+	private void findCourseAndStudents(InstructorDAO instructorDAO) {
+
+		int id=10;
+
+		Course course = instructorDAO.findCourseAndStudentsByCourseId(id);
+
+		System.out.println("Loaded course : " + course);
+		System.out.println("Students : " + course.getStudents());
 	}
 
 	private void createCourseAndStudents(InstructorDAO instructorDAO) {
@@ -104,7 +154,7 @@ public class HibernatejpaApplication {
 
 	private void deleteCourseById(InstructorDAO instructorDAO) {
 
-		int id=19;
+		int id=15;
 		System.out.println("Deleting course id:  " + id);
 		instructorDAO.deleteCourseById(id);
 	}

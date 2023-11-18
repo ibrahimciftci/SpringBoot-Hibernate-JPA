@@ -3,6 +3,7 @@ package com.springboot.hibernatejpa.dao;
 import com.springboot.hibernatejpa.entity.Course;
 import com.springboot.hibernatejpa.entity.Instructor;
 import com.springboot.hibernatejpa.entity.InstructorDetail;
+import com.springboot.hibernatejpa.entity.Student;
 
 import java.util.List;
 
@@ -34,4 +35,13 @@ public interface InstructorDAO {
     void saveCourse(Course course);
 
     Course findCourseAndReviewByCourseId(int id);
+
+    Course findCourseAndStudentsByCourseId(int id);
+
+    Student findStudentAndCoursesByStudentId(int id);
+
+    void updateStudent(Student student);
+
+    void deleteStudentById(int id);
+
 }
