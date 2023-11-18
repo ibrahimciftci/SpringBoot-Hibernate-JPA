@@ -1,10 +1,7 @@
 package com.springboot.hibernatejpa;
 
 import com.springboot.hibernatejpa.dao.InstructorDAO;
-import com.springboot.hibernatejpa.entity.Course;
-import com.springboot.hibernatejpa.entity.Instructor;
-import com.springboot.hibernatejpa.entity.InstructorDetail;
-import com.springboot.hibernatejpa.entity.Review;
+import com.springboot.hibernatejpa.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,8 +37,26 @@ public class HibernatejpaApplication {
 			//createInstructorWithCoursesAndWithCoursesReview(instructorDAO);
 			//retrieveCourseAndReviews(instructorDAO);
 			//deleteCourseAndReviews(instructorDAO);
+			
+			createCourseAndStudents(instructorDAO);
 
 		};
+	}
+
+	private void createCourseAndStudents(InstructorDAO instructorDAO) {
+
+		Course course = new Course("Python");
+
+		Student student1 = new Student("Adem", "Kaya", "adem@gmail.com");
+		Student student2 = new Student("Mehmet", "Can", "mehmet@gmail.com");
+
+		course.addStudent(student1);
+		course.addStudent(student2);
+
+		System.out.println("Saving the course : " + course);
+		System.out.println("associated students : " + course.getStudents());
+
+		instructorDAO.saveCourse(course);
 	}
 
 	private void deleteCourseAndReviews(InstructorDAO instructorDAO) {
